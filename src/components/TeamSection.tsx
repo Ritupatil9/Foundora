@@ -6,73 +6,136 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { PinContainer } from "@/components/ui/3d-pin";
+import { useState } from "react";
 
-import { User, Code, Megaphone, DollarSign } from "lucide-react";
+import { TrendingUp, Code, Sparkles, DollarSign } from "lucide-react";
 
 const aiTeam = [
   {
-    role: "CEO AI",
-    description: "Helps with vision, leadership, fundraising.",
-    icon: User,
-    bgColor: "bg-indigo-950", // Change this for different backgrounds
+    role: "AI CEO",
+    description: "Business Strategy",
+    detailedDescription: "Validates business models, defines market positioning, creates growth roadmaps, and guides major strategic decisions.",
+    icon: TrendingUp,
+    bgColor: "bg-gradient-to-br from-purple-400 to-blue-400",
   },
   {
-    role: "CTO AI",
-    description: "Guides technical architecture & development.",
+    role: "AI CTO",
+    description: "Technology & Development",
+    detailedDescription: "Designs scalable tech architecture, plans MVP development, optimizes performance, and prevents technical debt.",
     icon: Code,
-    bgColor: "bg-indigo-950",
+    bgColor: "bg-gradient-to-br from-blue-400 to-teal-400",
   },
   {
-    role: "CMO AI",
-    description: "Marketing, brand positioning, user growth.",
-    icon: Megaphone,
-    bgColor: "bg-indigo-950",
+    role: "AI CMO",
+    description: "Marketing & Growth",
+    detailedDescription: "Develops marketing strategies, identifies target audiences, creates growth campaigns, and optimizes conversion rates.",
+    icon: Sparkles,
+    bgColor: "bg-gradient-to-br from-pink-400 to-orange-400",
   },
   {
-    role: "CFO AI",
-    description: "Finance, pricing strategy, business modeling.",
+    role: "AI CFO",
+    description: "Finance & Operations",
+    detailedDescription: "Manages financial planning, tracks key metrics, optimizes operations, and ensures sustainable growth.",
     icon: DollarSign,
-    bgColor: "bg-indigo-950",
+    bgColor: "bg-green-400",
   },
 ];
 
 export default function TeamSection() {
+  const [flippedCards, setFlippedCards] = useState<{ [key: number]: boolean }>({});
+
+  const handleMouseEnter = (index: number) => {
+    setFlippedCards(prev => ({
+      ...prev,
+      [index]: true
+    }));
+  };
+
+  const handleMouseLeave = (index: number) => {
+    setFlippedCards(prev => ({
+      ...prev,
+      [index]: false
+    }));
+  };
+
   return (
-    <section className="py-16">
-      <h2 className="text-4xl font-extrabold text-center mb-12">
-        Meet Your AI Co-Founder Team
-      </h2>
-      <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 max-w-7xl mx-auto">
-        {aiTeam.map((member, index) => {
-          const Icon = member.icon;
-          return (
-            <PinContainer
-              key={index}
-              title={member.role}
-              href="#"
-              disableEffects
-              frameless
-              className="w-full h-full"
-              containerClassName="block h-96 w-full"
-            >
-              <Card
-                className={`flex flex-col items-center p-10 ${member.bgColor} rounded-xl border w-full h-full`}
-              >
-                <div className="mb-6">
-                  <div className="flex items-center justify-center w-24 h-24 rounded-full bg-purple-500 mx-auto">
-                    <Icon className="h-12 w-12 text-white" />
+    <section className="py-20 bg-white min-h-screen flex flex-col justify-center">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Main Heading */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="text-gray-900">Meet Your </span>
+            <span className="bg-gradient-to-r from-purple-600 to-green-600 bg-clip-text text-transparent">
+              AI Co-Founder Team
+            </span>
+          </h2>
+          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+            Four specialized AI agents working together to turn your startup dreams into reality
+          </p>
+        </div>
+
+        {/* AI Co-Founder Cards - Improved Grid Layout */}
+        <div className="flex justify-center items-center w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 place-items-center max-w-6xl mx-auto w-full">
+            {aiTeam.map((member, index) => {
+              const Icon = member.icon;
+              const isFlipped = flippedCards[index];
+              
+              return (
+                <div key={index} className="w-full flex justify-center">
+                  <div 
+                    className="relative w-full max-w-64 h-80 cursor-pointer perspective-1000"
+                    onMouseEnter={() => handleMouseEnter(index)}
+                    onMouseLeave={() => handleMouseLeave(index)}
+                  >
+                    <div
+                      className={`relative w-full h-full transition-transform duration-700 transform-style-preserve-3d ${
+                        isFlipped ? 'rotate-y-180' : ''
+                      }`}
+                    >
+                      {/* Front of card */}
+                      <div className="absolute w-full h-full backface-hidden">
+                        <Card className="flex flex-col items-center p-6 bg-indigo-950 border border-indigo-900 rounded-2xl w-full h-full hover:bg-indigo-900 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-indigo-500/20">
+                          {/* Icon Circle */}
+                          <div className="mb-4">
+                            <div className={`flex items-center justify-center w-20 h-20 rounded-full ${member.bgColor} mx-auto shadow-lg`}>
+                              <Icon className="h-10 w-10 text-white" />
+                            </div>
+                          </div>
+                          
+                          {/* Role Title */}
+                          <CardTitle className="text-xl font-bold text-center mb-2 text-white">
+                            {member.role}
+                          </CardTitle>
+                          
+                          {/* Description */}
+                          <CardDescription className="text-center text-gray-200 text-base">
+                            {member.description}
+                          </CardDescription>
+                        </Card>
+                      </div>
+
+                      {/* Back of card */}
+                      <div className="absolute w-full h-full backface-hidden rotate-y-180">
+                        <Card className="flex flex-col items-center p-6 bg-indigo-900 border border-indigo-700 rounded-2xl w-full h-full hover:bg-indigo-800 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-indigo-500/20">
+                          {/* Role Title */}
+                          <CardTitle className="text-xl font-bold text-center mb-6 text-white">
+                            {member.role}
+                          </CardTitle>
+                          
+                          {/* Detailed Description */}
+                          <CardDescription className="text-center text-gray-200 text-sm leading-relaxed px-2">
+                            {member.detailedDescription}
+                          </CardDescription>
+                        </Card>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <CardTitle className="text-2xl font-semibold text-center mb-2 text-white">
-                  {member.role}
-                </CardTitle>
-                <CardDescription className="text-center text-white">
-                  {member.description}
-                </CardDescription>
-              </Card>
-            </PinContainer>
-          );
-        })}
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );
