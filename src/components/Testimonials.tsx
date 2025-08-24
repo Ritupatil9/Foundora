@@ -1,6 +1,7 @@
-
+"use client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
+import { motion, useScroll, useTransform } from "motion/react";
 
 const testimonials = [
   {
@@ -27,51 +28,85 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+  const { scrollYProgress } = useScroll();
+  
+  // Transform values for scroll-based animations
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0.3]);
+
   return (
-    <section className="py-24 bg-muted/30">
+    <motion.section 
+      className="py-24 bg-muted/30"
+      style={{ opacity }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+        >
           <h2 className="font-display font-bold text-display mb-4">
             Loved by thousands of creators
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Join the community of successful entrepreneurs and developers who trust Foundora with their most important projects.
           </p>
-        </div>
+        </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card 
-              key={index} 
-              className="hover:shadow-medium transition-all duration-300 animate-fade-in"
-              style={{ animationDelay: `${index * 0.2}s` }}
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 100, scale: 0.8 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                duration: 0.6, 
+                ease: "easeOut", 
+                delay: index * 0.2 
+              }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05, y: -10 }}
             >
-              <CardContent className="p-6">
-                <div className="flex mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  "{testimonial.content}"
-                </p>
-                
-                <div className="flex items-center">
-                  <div className="w-10 h-10 gradient-primary rounded-full flex items-center justify-center text-white font-semibold text-sm mr-3">
-                    {testimonial.avatar}
+              <Card 
+                className="hover:shadow-medium transition-all duration-300"
+              >
+                <CardContent className="p-6">
+                  <motion.div 
+                    className="flex mb-4"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                    ))}
+                  </motion.div>
+                  
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    "{testimonial.content}"
+                  </p>
+                  
+                  <div className="flex items-center">
+                    <motion.div 
+                      className="w-10 h-10 gradient-primary rounded-full flex items-center justify-center text-white font-semibold text-sm mr-3"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {testimonial.avatar}
+                    </motion.div>
+                    <div>
+                      <div className="font-semibold">{testimonial.name}</div>
+                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="font-semibold">{testimonial.name}</div>
-                    <div className="text-sm text-muted-foreground">{testimonial.role}</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

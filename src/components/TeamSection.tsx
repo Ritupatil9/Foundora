@@ -1,14 +1,14 @@
 "use client";
 
-import {
-  Card,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
 import { PinContainer } from "@/components/ui/3d-pin";
+import {
+    Card,
+    CardDescription,
+    CardTitle,
+} from "@/components/ui/card";
+import { Code, DollarSign, Sparkles, TrendingUp } from "lucide-react";
+import { motion } from "motion/react";
 import { useState } from "react";
-
-import { TrendingUp, Code, Sparkles, DollarSign } from "lucide-react";
 
 const aiTeam = [
   {
@@ -42,27 +42,19 @@ const aiTeam = [
 ];
 
 export default function TeamSection() {
-  const [flippedCards, setFlippedCards] = useState<{ [key: number]: boolean }>({});
-
-  const handleMouseEnter = (index: number) => {
-    setFlippedCards(prev => ({
-      ...prev,
-      [index]: true
-    }));
-  };
-
-  const handleMouseLeave = (index: number) => {
-    setFlippedCards(prev => ({
-      ...prev,
-      [index]: false
-    }));
-  };
-
   return (
-    <section className="py-20 bg-white min-h-screen flex flex-col justify-center">
+    <motion.section 
+      className="py-20 bg-white min-h-screen flex flex-col justify-center"
+    >
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Heading */}
-        <div className="text-center mb-16">
+        {/* Heading */}
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+        >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="text-gray-900">Meet Your </span>
             <span className="bg-gradient-to-r from-purple-600 to-green-600 bg-clip-text text-transparent">
@@ -72,71 +64,77 @@ export default function TeamSection() {
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
             Four specialized AI agents working together to turn your startup dreams into reality
           </p>
-        </div>
+        </motion.div>
 
-        {/* AI Co-Founder Cards - Improved Grid Layout */}
-        <div className="flex justify-center items-center w-full">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 place-items-center max-w-6xl mx-auto w-full">
-            {aiTeam.map((member, index) => {
-              const Icon = member.icon;
-              const isFlipped = flippedCards[index];
-              
-              return (
-                <div key={index} className="w-full flex justify-center">
-                  <div 
-                    className="relative w-full max-w-64 h-80 cursor-pointer perspective-1000"
-                    onMouseEnter={() => handleMouseEnter(index)}
-                    onMouseLeave={() => handleMouseLeave(index)}
-                  >
-                    <div
-                      className={`relative w-full h-full transition-transform duration-700 transform-style-preserve-3d ${
-                        isFlipped ? 'rotate-y-180' : ''
-                      }`}
-                    >
-                      {/* Front of card */}
-                      <div className="absolute w-full h-full backface-hidden">
-                        <Card className="flex flex-col items-center p-6 bg-indigo-950 border border-indigo-900 rounded-2xl w-full h-full hover:bg-indigo-900 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-indigo-500/20">
-                          {/* Icon Circle */}
-                          <div className="mb-4">
-                            <div className={`flex items-center justify-center w-20 h-20 rounded-full ${member.bgColor} mx-auto shadow-lg`}>
-                              <Icon className="h-10 w-10 text-white" />
-                            </div>
-                          </div>
-                          
-                          {/* Role Title */}
-                          <CardTitle className="text-xl font-bold text-center mb-2 text-white">
-                            {member.role}
-                          </CardTitle>
-                          
-                          {/* Description */}
-                          <CardDescription className="text-center text-gray-200 text-base">
-                            {member.description}
-                          </CardDescription>
-                        </Card>
-                      </div>
-
-                      {/* Back of card */}
-                      <div className="absolute w-full h-full backface-hidden rotate-y-180">
-                        <Card className="flex flex-col items-center p-6 bg-indigo-900 border border-indigo-700 rounded-2xl w-full h-full hover:bg-indigo-800 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-indigo-500/20">
-                          {/* Role Title */}
-                          <CardTitle className="text-xl font-bold text-center mb-6 text-white">
-                            {member.role}
-                          </CardTitle>
-                          
-                          {/* Detailed Description */}
-                          <CardDescription className="text-center text-gray-200 text-sm leading-relaxed px-2">
-                            {member.detailedDescription}
-                          </CardDescription>
-                        </Card>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+        {/* Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 place-items-center max-w-6xl mx-auto w-full">
+          {aiTeam.map((member, index) => (
+            <PinContainer
+              key={index}
+              title={member.role}
+              href="#"
+              containerClassName="group w-full"
+            >
+              <FlipCard member={member} index={index} />
+            </PinContainer>
+          ))}
         </div>
       </div>
-    </section>
+    </motion.section>
+  );
+}
+
+function FlipCard({ member, index }: { member: any; index: number }) {
+  const [flipped, setFlipped] = useState(false);
+  const Icon = member.icon;
+
+  return (
+    <motion.div
+      className="w-full flex justify-center"
+      initial={{ opacity: 0, y: 100, scale: 0.8 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{
+        duration: 0.6,
+        ease: "easeOut",
+        delay: index * 0.1,
+      }}
+      viewport={{ once: true }}
+    >
+      <div
+        className="relative w-full max-w-64 h-80 cursor-pointer [perspective:1000px]"
+        onClick={() => setFlipped(!flipped)}
+      >
+        {/* Inner container for flip effect */}
+        <div
+          className={`relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] ${
+            flipped ? "[transform:rotateY(180deg)]" : ""
+          }`}
+        >
+          {/* Front side */}
+          <Card className="absolute inset-0 flex flex-col items-center p-6 bg-indigo-950 border border-indigo-900 rounded-2xl [backface-visibility:hidden]">
+            <div className="mb-4">
+              <div
+                className={`flex items-center justify-center w-20 h-20 rounded-full ${member.bgColor} mx-auto shadow-lg`}
+              >
+                <Icon className="h-10 w-10 text-white" />
+              </div>
+            </div>
+            <CardTitle className="text-xl font-bold text-center mb-2 text-white">
+              {member.role}
+            </CardTitle>
+            <CardDescription className="text-center text-gray-200 text-base">
+              {member.description}
+            </CardDescription>
+          </Card>
+
+          {/* Back side */}
+          <Card className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-indigo-900 border border-indigo-800 rounded-2xl text-white [transform:rotateY(180deg)] [backface-visibility:hidden]">
+            <CardDescription className="text-center text-gray-200 text-sm leading-relaxed">
+              {member.detailedDescription}
+            </CardDescription>
+          </Card>
+        </div>
+      </div>
+    </motion.div>
   );
 }
