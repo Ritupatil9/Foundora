@@ -16,16 +16,16 @@ export const PinContainer = ({
   className?: string;
   containerClassName?: string;
 }) => {
-  const [transform, setTransform] = useState("rotateX(0deg) scale(1)");
+  const [transform, setTransform] = useState("perspective(1000px) rotateX(0deg) scale(1)");
   const [isHovered, setIsHovered] = useState(false);
-
+  
   const onMouseEnter = () => {
-    // stronger recede on hover for deeper 3D
-    setTransform("rotateX(40deg) scale(0.9)");
+    setTransform("perspective(1000px) rotateX(10deg) scale(0.95)");
     setIsHovered(true);
   };
+  
   const onMouseLeave = () => {
-    setTransform("rotateX(0deg) scale(1)");
+    setTransform("perspective(1000px) rotateX(0deg) scale(1)");
     setIsHovered(false);
   };
 
@@ -44,7 +44,11 @@ export const PinContainer = ({
         className="absolute inset-0 flex items-center justify-center"
       >
         <div
-          style={{ transform }}
+          style={{ 
+            transform,
+            transformOrigin: "center center",
+            transition: "transform 0.35s ease",
+          }}
           className="relative w-full h-full flex items-center justify-center rounded-2xl shadow-[0_6px_12px_rgb(0_0_0/0.12)] transition-transform duration-300 overflow-visible"
         >
           <div className={cn("relative z-10 w-full h-full", className)}>{children}</div>
@@ -65,14 +69,32 @@ export const PinPerspective = ({
   hovered?: boolean;
 }) => {
   return (
-    <motion.div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover/pin:opacity-100 z-[11] transition duration-500">
-      <div className=" w-full h-full -mt-7 flex-none  inset-0">
-        {/* Enhanced title positioned outside the 3D perspective container */}
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 flex justify-center z-20">
+    <motion.div 
+      className="pointer-events-none absolute inset-0 flex items-center justify-center z-[11]"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: hovered ? 1 : 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="w-full h-full -mt-7 flex-none inset-0">
+        {/* Title positioned at center and animating upward on hover */}
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
+          initial={{ y: 0, opacity: 0 }}
+          animate={{ 
+            y: hovered ? -120 : 0, // Move upward when hovered
+            opacity: hovered ? 1 : 0
+          }}
+          transition={{ 
+            type: "spring", 
+            stiffness: 300, 
+            damping: 20,
+            delay: hovered ? 0.1 : 0
+          }}
+        >
           <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            initial={{ scale: 0.8 }}
+            animate={{ scale: hovered ? 1 : 0.8 }}
+            transition={{ type: "spring", stiffness: 200 }}
             className="relative"
           >
             <a
@@ -91,11 +113,12 @@ export const PinPerspective = ({
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 blur-sm opacity-50 -z-10"></div>
             </a>
             
-            {/* Arrow pointing down to the line */}
+            {/* Arrow pointing down to the card */}
             <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-purple-600"></div>
           </motion.div>
-        </div>
+        </motion.div>
 
+        {/* Rest of the component remains the same */}
         <motion.div
           style={{
             transformOrigin: "50% 0%",
@@ -120,7 +143,6 @@ export const PinPerspective = ({
               animate={{
                 opacity: [0, 1, 0.5, 0],
                 scale: 1,
-
                 z: 0,
               }}
               transition={{
@@ -140,7 +162,6 @@ export const PinPerspective = ({
               animate={{
                 opacity: [0, 1, 0.5, 0],
                 scale: 1,
-
                 z: 0,
               }}
               transition={{
@@ -160,7 +181,6 @@ export const PinPerspective = ({
               animate={{
                 opacity: [0, 1, 0.5, 0],
                 scale: 1,
-
                 z: 0,
               }}
               transition={{
@@ -172,12 +192,23 @@ export const PinPerspective = ({
             ></motion.div>
           </>
         </motion.div>
-
+        
+        {/* Line that emerges from further below the symbols (AI CEO, AI CTO, etc.) */}
         <>
-          <motion.div className="absolute right-1/2 bottom-1/2 bg-gradient-to-b from-transparent to-cyan-500 translate-y-[14px] w-px h-20 group-hover/pin:h-40 blur-[2px]" />
-          <motion.div className="absolute right-1/2 bottom-1/2 bg-gradient-to-b from-transparent to-cyan-500 translate-y-[14px] w-px h-20 group-hover/pin:h-40  " />
-          <motion.div className="absolute right-1/2 translate-x-[1.5px] bottom-1/2 bg-cyan-600 translate-y-[14px] w-[4px] h-[4px] rounded-full z-40 blur-[3px]" />
-          <motion.div className="absolute right-1/2 translate-x-[0.5px] bottom-1/2 bg-cyan-300 translate-y-[2px] h-[2px] rounded-full z-40 " />
+          {/* Blurred line */}
+          <motion.div 
+            className="absolute top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-t from-cyan-500 to-transparent w-px h-0 group-hover/pin:h-40 blur-[2px]"
+            style={{ transformOrigin: 'bottom center' }}
+          />
+          {/* Non-blurred line */}
+          <motion.div 
+            className="absolute top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-t from-cyan-500 to-transparent w-px h-0 group-hover/pin:h-40"
+            style={{ transformOrigin: 'bottom center' }}
+          />
+          {/* Dot with blur */}
+          <motion.div className="absolute top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 bg-cyan-600 w-[4px] h-[4px] rounded-full z-40 blur-[3px]" />
+          {/* Dot without blur */}
+          <motion.div className="absolute top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 bg-cyan-300 w-[2px] h-[2px] rounded-full z-40" />
         </>
       </div>
     </motion.div>
