@@ -16,7 +16,7 @@ const Hero = () => {
     <>
       {/* Hero Section */}
       <motion.section 
-        className="relative min-h-screen w-full min-w-o flex items-center overflow-hidden bg-gradient-to-b from-[#1C1B3E] to-[#141229]"
+        className="relative pt-32 min-h-screen w-full min-w-o flex items-center overflow-hidden bg-gradient-to-b from-[#1C1B3E] to-[#141229]"
         style={{ opacity, scale }}
       >
         {/* Background gradient elements */}

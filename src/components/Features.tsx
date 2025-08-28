@@ -63,7 +63,7 @@ const Features = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
         >
-          <h2 className="font-display font-bold text-display mb-4 text-gradient">
+          <h2 className="font-display font-bold text-display mb-4 ">
             Everything you need to succeed
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">

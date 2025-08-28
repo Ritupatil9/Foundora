@@ -6,8 +6,15 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import React from "react";
+import "./lib/utils";
 
 const queryClient = new QueryClient();
+
+// In your app/page.tsx
+import Navigation from '@/components/Navigation';
+import TeamSection from '@/components/TeamSection';
+
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

@@ -3,49 +3,45 @@
 import { PinContainer } from "@/components/ui/3d-pin";
 import { Card, CardTitle } from "@/components/ui/card";
 import { Code, DollarSign, Sparkles, TrendingUp } from "lucide-react";
-import { motion } from "motion/react";
-import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const aiTeam = [
   {
-    role: "AI CEO",
-    description: "Business Strategy",
+    role: "CEO AI",
+    description: "Helps with vision, leadership, fundraising.",
     icon: TrendingUp,
     bgColor: "bg-gradient-to-br from-purple-400 to-blue-400",
   },
   {
-    role: "AI CTO",
-    description: "Technology & Development",
+    role: "CTO AI",
+    description: "Guides technical architecture & development.",
     icon: Code,
     bgColor: "bg-gradient-to-br from-blue-400 to-teal-400",
   },
   {
-    role: "AI CMO",
-    description: "Marketing & Growth",
+    role: "CMO AI",
+    description: "Marketing, brand positioning, user growth.",
     icon: Sparkles,
     bgColor: "bg-gradient-to-br from-pink-400 to-orange-400",
   },
   {
-    role: "AI CFO",
-    description: "Finance & Operations",
+    role: "CFO AI",
+    description: "Finance, pricing strategy, business modeling.",
     icon: DollarSign,
     bgColor: "bg-green-400",
   },
 ];
 
 export default function TeamSection() {
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  // ✅ Detect screen size
-  useEffect(() => {
-    const checkScreen = () => setIsDesktop(window.innerWidth >= 768); // md breakpoint
-    checkScreen();
-    window.addEventListener("resize", checkScreen);
-    return () => window.removeEventListener("resize", checkScreen);
-  }, []);
-
   return (
-    <motion.section className="py-20 bg-white min-h-screen flex flex-col justify-center">
+    <motion.section
+      id="team"
+      className="pt-32 pb-20 bg-white min-h-screen flex flex-col justify-center"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={{ once: true }}
+    >
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <motion.div
@@ -62,60 +58,50 @@ export default function TeamSection() {
             </span>
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-            Four specialized AI agents working together to turn your startup
-            dreams into reality
+            Four specialized AI agents working together to turn your startup dreams into reality
           </p>
         </motion.div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto w-full relative z-10">
           {aiTeam.map((member, index) => {
             const Icon = member.icon;
-
-            const cardContent = (
-              <motion.div
-                className="w-full"
-                initial={{ opacity: 0, y: 100, scale: 0.8 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{
-                  duration: 0.6,
-                  ease: "easeOut",
-                  delay: index * 0.1,
-                }}
-                viewport={{ once: true }}
-              >
-                <Card className="w-full h-[280px] sm:h-[300px] flex flex-col items-center p-6 bg-indigo-950 border border-indigo-900 rounded-2xl">
-                  <div className="mb-4 mt-12">
-                    <div
-                      className={`flex items-center justify-center w-20 h-20 rounded-full ${member.bgColor} mx-auto shadow-lg`}
-                    >
-                      <Icon className="h-10 w-10 text-white" />
-                    </div>
-                  </div>
-                  <CardTitle className="text-xl font-bold text-center mb-2 text-white">
-                    {member.role}
-                  </CardTitle>
-                  <p className="text-sm text-gray-300 text-center">
-                    {member.description}
-                  </p>
-                </Card>
-              </motion.div>
-            );
-
-            // ✅ Use PinContainer only on desktop
-            return isDesktop ? (
+            return (
               <PinContainer
                 key={index}
                 title={member.role}
                 href="#"
+                className=""
                 containerClassName="group w-full flex justify-center"
               >
-                {cardContent}
+                <motion.div
+                  className="w-full"
+                  initial={{ opacity: 0, y: 100, scale: 0.8 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{
+                    duration: 0.6,
+                    ease: "easeOut",
+                    delay: index * 0.1,
+                  }}
+                  viewport={{ once: true }}
+                >
+                  <Card className="w-64 h-80 bg-[#1a1443] flex flex-col items-center p-6 rounded-2xl shadow-lg">
+                    <div className="flex flex-col items-center mb-4 mt-12">
+                      <div
+                        className={`flex items-center justify-center w-20 h-20 rounded-full ${member.bgColor} mx-auto shadow-lg`}
+                      >
+                        <Icon className="h-10 w-10 text-white" />
+                      </div>
+                    </div>
+                    <CardTitle className="text-xl font-bold text-center mt-6 text-white">
+                      {member.role}
+                    </CardTitle>
+                    <p className="text-sm text-gray-300 text-center mt-4">
+                      {member.description}
+                    </p>
+                  </Card>
+                </motion.div>
               </PinContainer>
-            ) : (
-              <div key={index} className="w-full flex justify-center">
-                {cardContent}
-              </div>
             );
           })}
         </div>

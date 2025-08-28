@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
+//import {  } from "@radix-ui/react-navigation-menu";
+
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,7 +38,7 @@ const Navigation = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <div className="text-2xl font-display font-bold text-gradient">
+            <div className="text-2xl font-display font-bold justify-left text-foreground">
               Foundora
             </div>
           </motion.div>
@@ -81,10 +83,11 @@ const Navigation = () => {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-              >
+              ><a href="#cta">
                 <Button className="gradient-primary text-white font-medium" size="sm">
-                  Get Started
+                  Join Waitlist
                 </Button>
+                </a>
               </motion.div>
             </div>
           </motion.div>
@@ -131,7 +134,7 @@ const Navigation = () => {
                 Pricing
               </motion.a>
               <motion.a 
-                href="#about" 
+                href="#Footer" 
                 className="block px-3 py-2 text-muted-foreground hover:text-foreground"
                 whileHover={{ x: 5 }}
                 whileTap={{ scale: 0.95 }}
@@ -152,7 +155,7 @@ const Navigation = () => {
                   whileTap={{ scale: 0.98 }}
                 >
                   <Button className="gradient-primary text-white w-full">
-                    Get Started
+                    Join Waitlist
                   </Button>
                 </motion.div>
               </div>

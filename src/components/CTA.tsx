@@ -1,84 +1,59 @@
-"use client";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { motion, useScroll, useTransform } from "motion/react";
 
-const CTA = () => {
-  const { scrollYProgress } = useScroll();
-  
-  // Transform values for scroll-based animations
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0.3]);
-
+export default function FounderCTA() {
   return (
-    <motion.section 
-      className="py-24 relative overflow-hidden"
-      style={{ opacity }}
+    
+
+    <motion.section
+    id="cta"
+      className=" from-[#1C1B3E] to-[#141229] text-black py-20 px-6"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      viewport={{ once: true }}
     >
-      <motion.div 
-        className="absolute inset-0 gradient-primary opacity-5"
-        style={{ y }}
-      />
-      
-      <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-        <motion.h2 
-          className="font-display font-bold text-display mb-6"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-        >
-          Ready to build something amazing?
-        </motion.h2>
-        
-        <motion.p 
-          className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          Join thousands of creators who are already building the future with Foundora. 
-          Start your journey today and see what you can accomplish.
-        </motion.p>
-        
-        <motion.div 
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          Unlock Your <span className="text-purple-400">Founder Potential</span>
+        </h2>
+        <p className="text-lg md:text-xl text-gray-900 mb-6">
+          Join 10,000+ founders for exclusive early access, special pricing, and the chance to build with your AI co-founder.
+        </p>
+
+        {/* Email Input + CTA */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4  border-black/20 p-4 rounded-lg bg-black/5">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="w-full sm:w-2/3 px-4 py-3 rounded-lg bg-white text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 border border-black/20"
+          />
+          <Button
+            size="lg"
+            className="gradient-primary text-white font-semibold px-6 py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
           >
-            <Button 
-              size="lg" 
-              className="gradient-primary text-white font-semibold px-8 py-4 text-lg shadow-large hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-            >
-              Start Building Now <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </motion.div>
-          
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="font-semibold px-8 py-4 text-lg hover:bg-muted/50"
-            >
-              Talk to Sales
-            </Button>
-          </motion.div>
-        </motion.div>
-        
-        
+            Join Waitlist
+          </Button>
+        </div>
+
+        <p className="text-sm text-gray-900 mb-10">No spam, ever. We respect your inbox.</p>
+
+        {/* Benefits */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-left text-sm text-gray-900">
+          <div className="bg-black/4 p-4 rounded-lg border border-black/10">
+            <h3 className="font-semibold text-purple-400 mb-2">🇮🇳 Fair Indian Pricing</h3>
+            <p>Global quality, priced for the local ecosystem.</p>
+          </div>
+          <div className="bg-black/4 p-4 rounded-lg border border-black/10">
+            <h3 className="font-semibold text-cyan-400 mb-2">🎓 Student Discounts</h3>
+            <p>Special offers for the next generation of builders.</p>
+          </div>
+          <div className="bg-black/4 p-4 rounded-lg border border-black/10">
+            <h3 className="font-semibold text-pink-400 mb-2">🚀 Early Bird Perks</h3>
+            <p>Lock in the best price and get priority access.</p>
+          </div>
+        </div>
       </div>
     </motion.section>
   );
-};
-
-export default CTA;
+}
