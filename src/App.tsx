@@ -1,19 +1,19 @@
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { TooltipProvider } from "@/components/common/tooltip";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+import Index from "./components/pages/Index";
+import NotFound from "./components/pages/NotFound";
 import React from "react";
 import "./lib/utils";
 
 const queryClient = new QueryClient();
 
 // In your app/page.tsx
-import Navigation from '@/components/Navigation';
-import TeamSection from '@/components/TeamSection';
+import Navigation from '@/components/layout/Navigation';
+import TeamSection from '@/components/pages/TeamSection';
 
 
 const App = () => (

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/common/button";
 import { ArrowRight, Play } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 
