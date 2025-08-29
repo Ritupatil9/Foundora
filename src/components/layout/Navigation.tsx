@@ -67,10 +67,7 @@ const Navigation = () => {
                 Pricing
               </motion.a>
               <motion.a 
-                href="#about" 
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.95 }}
+                href="#footer" 
               >
                 About
               </motion.a>

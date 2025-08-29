@@ -8,12 +8,14 @@ import Index from "./components/pages/Index";
 import NotFound from "./components/pages/NotFound";
 import React from "react";
 import "./lib/utils";
-
 const queryClient = new QueryClient();
 
 // In your app/page.tsx
 import Navigation from '@/components/layout/Navigation';
 import TeamSection from '@/components/pages/TeamSection';
+import Features from "./components/pages/Features";
+import Price from "./components/pages/pricing";
+
 
 
 const App = () => (
@@ -25,7 +27,7 @@ const App = () => (
       <TracingBeam>
         <Routes>
         <Route path="/" element={<Index />} />
-        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        
         <Route path="*" element={<NotFound />} />
         </Routes>
       </TracingBeam>

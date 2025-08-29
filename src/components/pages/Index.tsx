@@ -8,16 +8,18 @@ import Testimonials from "@/components/pages/Testimonials";
 import Price from "@/components/pages/pricing";
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="w-full">
       <Navigation />
       <div className="w-full">
-        <Hero />
-        <TeamSection />
-        <Features />
-        <Price />
-        <Testimonials />
-        <CTA />
-        <Footer />
+       <section id="hero"><Hero /></section> 
+        <section id="team">  <TeamSection /></section>
+        <section id="features"><Features /></section>
+        <section id="pricing"><Price /></section>
+        <section id="CTA"> <CTA /></section>
+        <section id="testimonials"> <Testimonials /></section>
+        <section id="footer" className="scroll-mt-16"><Footer /></section>
+
+  
       </div>
     </div>
   );
