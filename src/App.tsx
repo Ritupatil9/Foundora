@@ -6,12 +6,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Index from "./components/pages/Index";
 import NotFound from "./components/pages/NotFound";
-import React from "react";
+import AgentsPage from "./components/pages/AgentsPage"; // ✅ your page
 import "./lib/utils";
+
 const queryClient = new QueryClient();
-
-
-
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -19,13 +17,13 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-      <TracingBeam>
-        <Routes>
-        <Route path="/" element={<Index />} />
-        
-        <Route path="*" element={<NotFound />} />
-        </Routes>
-      </TracingBeam>
+        <TracingBeam>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/AgentsPage" element={<AgentsPage />} /> {/* ✅ added */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </TracingBeam>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

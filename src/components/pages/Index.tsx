@@ -6,16 +6,16 @@ import Navigation from "@/components/layout/Navigation";
 import TeamSection from "@/components/pages/TeamSection";
 import Testimonials from "@/components/pages/Testimonials";
 import Price from "@/components/pages/pricing";
-import TracingBeam from "../ui/tracing-beam";
+import TracingBeam from "@/components/ui/tracing-beam";
 
-const Index = () => {
+function Index()  {
   return (
- 
-      <div className="w-full">
+     <div className="w-full">
         <Navigation />
 
         <section id="hero"><Hero /></section> 
         <section id="team"><TeamSection /></section>
+        
         <section id="features"><Features /></section>
         <section id="pricing"><Price /></section>
         <section id="CTA"><CTA /></section>

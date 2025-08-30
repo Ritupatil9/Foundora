@@ -4,6 +4,8 @@ import { PinContainer } from "@/components/ui/3d-pin";
 import { Card, CardTitle } from "@/components/common/card";
 import { Code, DollarSign, Sparkles, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // ✅ correct for React Router DOM
+import { Button } from "@/components/common/button"; // ✅ your button component
 
 const aiTeam = [
   {
@@ -33,6 +35,8 @@ const aiTeam = [
 ];
 
 export default function TeamSection() {
+  const navigate = useNavigate(); // ✅ React Router navigation
+
   return (
     <motion.section
       id="team"
@@ -104,6 +108,14 @@ export default function TeamSection() {
               </PinContainer>
             );
           })}
+        </div>
+
+        {/* ✅ Navigation Button */}
+        <div className="flex justify-center mt-12 ">
+          <Button onClick={() => navigate("/AgentsPage")}
+             className="bg-indigo-950 text-white  ">
+            Click to open agents on a new page
+          </Button>
         </div>
       </div>
     </motion.section>
