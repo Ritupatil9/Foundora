@@ -1,5 +1,5 @@
 "use client";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/common/card";
 import { Star } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 

@@ -93,8 +93,8 @@ export default function Footer() {
       </div>
 
       {/* Big Background Text */}
-      <div className="max-w-7xl mx-auto px-6 pb-8">
-        <h1 className="text-[8rem] md:text-[10rem] font-extrabold text-white/5 tracking-tight justify-center flex">
+      <div className="max-w-7xl mx-auto px-4 pt-0 pb-40 -mt-24">
+        <h1 className="text-[10rem] md:text-[10rem] font-extrabold text-white/5 tracking-tight justify-center leading-none">
           Foundora
         </h1>
       </div>

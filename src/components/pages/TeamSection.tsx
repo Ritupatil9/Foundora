@@ -1,7 +1,7 @@
 "use client";
 
 import { PinContainer } from "@/components/ui/3d-pin";
-import { Card, CardTitle } from "@/components/ui/card";
+import { Card, CardTitle } from "@/components/common/card";
 import { Code, DollarSign, Sparkles, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 

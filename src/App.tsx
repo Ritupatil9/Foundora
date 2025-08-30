@@ -10,11 +10,6 @@ import React from "react";
 import "./lib/utils";
 const queryClient = new QueryClient();
 
-// In your app/page.tsx
-import Navigation from '@/components/layout/Navigation';
-import TeamSection from '@/components/pages/TeamSection';
-import Features from "./components/pages/Features";
-import Price from "./components/pages/pricing";
 
 
 

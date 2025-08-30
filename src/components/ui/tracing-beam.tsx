@@ -33,32 +33,23 @@ export const TracingBeam = ({
   });
 
   // Measure content and ensure the beam is at least viewport height
-  useLayoutEffect(() => {
-    const measureAndSetSvgHeight = () => {
-      if (!contentRef.current) return;
-      const contentHeight = contentRef.current.offsetHeight;
-      const viewportHeight = window.innerHeight || 0;
-      setSvgHeight(Math.max(contentHeight, viewportHeight));
-    };
+ useLayoutEffect(() => {
+  const measureAndSetSvgHeight = () => {
+    const fullPageHeight = document.documentElement.scrollHeight;
+    setSvgHeight(fullPageHeight);
+  };
 
-    measureAndSetSvgHeight();
+  measureAndSetSvgHeight();
 
-    const handleResize = () => measureAndSetSvgHeight();
-    window.addEventListener("resize", handleResize);
+  window.addEventListener("resize", measureAndSetSvgHeight);
+  window.addEventListener("load", measureAndSetSvgHeight);
 
-    let resizeObserver: ResizeObserver | null = null;
-    if ("ResizeObserver" in window && contentRef.current) {
-      resizeObserver = new ResizeObserver(() => measureAndSetSvgHeight());
-      resizeObserver.observe(contentRef.current);
-    }
+  return () => {
+    window.removeEventListener("resize", measureAndSetSvgHeight);
+    window.removeEventListener("load", measureAndSetSvgHeight);
+  };
+}, []);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      if (resizeObserver) {
-        resizeObserver.disconnect();
-      }
-    };
-  }, []);
 
   useEffect(() => {
     const checkTablet = () => {
