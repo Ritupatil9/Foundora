@@ -2,6 +2,8 @@
 import { Card, CardContent } from "@/components/common/card";
 import { Zap, Shield, Users, Rocket, Code, BarChart3 } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/common/button";
 
 const features = [
   {
@@ -48,6 +50,7 @@ const Features = () => {
   // Transform values for scroll-based animations
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.3]);
+  const navigate = useNavigate();
 
   return (
     <motion.section 
@@ -112,7 +115,16 @@ const Features = () => {
           ))}
         </div>
       </div>
+      <div className="w-full flex justify-center items-center mt-12">
+        <Button
+          onClick={() => navigate("/FeatureAgent")}
+          className="bg-indigo-950 text-white rounded-lg hover:bg-indigo-900"
+        >
+          Click to open agents on a new page
+        </Button>
+      </div>
     </motion.section>
+    
   );
 };
 

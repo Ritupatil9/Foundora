@@ -2,8 +2,12 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/common/card";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/common/button";
 
 export default function Price() {
+  const navigate = useNavigate();
+
   return (
     <section
       id="pricing"
@@ -40,7 +44,7 @@ export default function Price() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-300 mb-2">Starting From</p>
+              <p className="text-gray-300 mb-2">Starting From Only</p>
               <p className="text-3xl font-extrabold text-white">₹XXX</p>
               <p className="text-gray-300">/month</p>
               <p className="text-sm text-purple-400 mt-4">
@@ -100,7 +104,7 @@ export default function Price() {
             </CardHeader>
             <CardContent>
               <p className="text-gray-300 mb-2">
-                Lock in the lowest possible price, forever.
+                Lock in the lowest possible price.
               </p>
               <p className="text-3xl font-extrabold text-white">₹???</p>
               <p className="text-gray-300">one-time</p>
@@ -110,6 +114,16 @@ export default function Price() {
             </CardContent>
           </Card>
         </motion.div>
+      </div>
+
+      {/* ✅ Button placed outside the grid */}
+      <div className="w-full flex justify-center items-center mt-12">
+        <Button
+          onClick={() => navigate("/PriceAgent")}
+          className="bg-indigo-950 text-white rounded-lg hover:bg-indigo-900"
+        >
+          Click to open agents on a new page
+        </Button>
       </div>
     </section>
   );

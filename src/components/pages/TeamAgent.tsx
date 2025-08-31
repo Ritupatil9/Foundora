@@ -1,6 +1,6 @@
 "use client";
 
-import TextType from "@/components/pages/TextType";
+import TextType from "@/components/ui/TextType";
 
 export default function AgentsPage() {
   return (
