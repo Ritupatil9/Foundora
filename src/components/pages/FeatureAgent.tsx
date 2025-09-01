@@ -1,6 +1,6 @@
 "use client";
 
-import RotatingText from "./RotatingText";    
+import RotatingText from "../ui/RotatingText";    
 
 export default function RotateDemo() {
   return (
