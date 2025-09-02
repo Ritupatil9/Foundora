@@ -1,11 +1,5 @@
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-import './components/pages/TeamSection.tsx'
-import './components/layout/Navigation.tsx'
+
 createRoot(document.getElementById("root")!).render(<App />);
-import './components/pages/TeamAgent.tsx'
-import './components/pages/PriceAgent.tsx'
-import './components/pages/pricing.tsx'
-import './components/pages/Features.tsx'
-import './components/pages/FeatureAgent.tsx'

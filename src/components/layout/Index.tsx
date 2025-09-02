@@ -2,28 +2,27 @@ import CTA from "@/components/pages/CTA";
 import Features from "@/components/pages/Features";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/pages/Hero";
-import Navigation from "@/components/layout/Navigation";
+import Navigation from "@/components/layout/Navbar";
 import TeamSection from "@/components/pages/TeamSection";
-import Testimonials from "@/components/pages/Testimonials";
 import Price from "@/components/pages/pricing";
-import TracingBeam from "@/components/ui/tracing-beam";
 
 function Index()  {
   return (
-     <div className="w-full">
+    <div className="w-full min-h-screen flex flex-col">
         <Navigation />
-
+    <main className="flex-grow">
         <section id="hero"><Hero /></section> 
         <section id="team"><TeamSection /></section>
-        
         <section id="features"><Features /></section>
         <section id="pricing"><Price /></section>
         <section id="CTA"><CTA /></section>
-        <section id="testimonials"><Testimonials /></section>
-        <section id="footer" className="scroll-mt-16"><Footer /></section>
-      </div>
-    
+        
+      </main>
+      <footer id="footer" className="mt-0">
+        <Footer />
+      </footer>
+        </div>
   );
-};
+}
 
 export default Index;

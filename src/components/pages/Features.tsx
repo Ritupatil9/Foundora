@@ -55,7 +55,7 @@ const Features = () => {
   return (
     <motion.section 
       id="features" 
-      className="py-24 bg-gradient-to-b from-background to-muted/30"
+      className="py-24"
       style={{ opacity }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -89,28 +89,28 @@ const Features = () => {
               whileHover={{ scale: 1.05, y: -10 }}
             >
               <Card 
-                className="group hover:shadow-medium transition-all duration-300 
-                           border-border/50 hover:border-accent/50 
-                           bg-muted/50"
-              >
-                <CardContent className="p-6">
-                  <motion.div 
-                    className="mb-4"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="w-12 h-12 gradient-accent rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <feature.icon className="h-6 w-6 text-white" />
-                    </div>
-                  </motion.div>
-                  <h3 className="font-semibold text-xl mb-2 group-hover:text-accent transition-colors">
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {feature.description}
-                  </p>
-                </CardContent>
-              </Card>
+  className="group hover:shadow-medium transition-all duration-300 
+             border-border/50 hover:border-accent/50 
+             bg-slate-500/50 h-full">
+  <CardContent className="p-6 flex flex-col h-full">
+    <motion.div 
+      className="mb-4"
+      whileHover={{ scale: 1.1, rotate: 5 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div className="w-12 h-12 gradient-accent rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+        <feature.icon className="h-6 w-6 text-white" />
+      </div>
+    </motion.div>
+    <h3 className="font-semibold text-xl mb-2 group-hover:text-accent transition-colors">
+      {feature.title}
+    </h3>
+    <p className="text-muted-foreground leading-relaxed flex-grow">
+      {feature.description}
+    </p>
+  </CardContent>
+</Card>
+
             </motion.div>
           ))}
         </div>

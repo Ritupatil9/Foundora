@@ -1,4 +1,3 @@
-
 export const AIChatPreviewDefaults = {
   containerHeightClass: "h-[500px]",
   messageMaxWidthClasses: "max-w-[85%] sm:max-w-[80%]",

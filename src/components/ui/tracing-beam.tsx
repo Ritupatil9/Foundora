@@ -109,7 +109,7 @@ export const TracingBeam = ({
   const beamX = isMobile ? 75 : 50;
  
   return (
-    <div className="mx-auto max-w-8xl pr-3 pl-1 sm:px-4 min-h-screen">
+    <div className="mx-auto max-w-8xl pr-3 pl-1 sm:px-4">
       <motion.div
         ref={ref}
         className={cn(
