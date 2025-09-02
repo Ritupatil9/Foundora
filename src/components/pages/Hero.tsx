@@ -20,17 +20,11 @@ export default function HeroSection({
   return (
     <motion.section
       id="home"
-  className="relative overflow-hidden pt-20 md:pt-24 pb-12 md:pb-16 px-2 sm:px-4"
+      className="pt-20 md:pt-24 pb-12 md:pb-16 px-2 sm:px-4"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      {/* Floating Gradient Elements */}
-      <motion.div className="absolute inset-0" initial={{ y: 0 }} animate={{ y: 50 }} transition={{ duration: 1 }}>
-        <div className="absolute top-1/4 w-full h-full bg-purple-500/10 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-1/4 w-full h-full bg-blue-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: "1s" }} />
-      </motion.div>
-
       {/* Content Container */}
       <div className={`relative z-10 mx-auto w-full ${containerMaxWidthClasses}`}>
         <div className="grid lg:grid-cols-2 gap-12 items-center">

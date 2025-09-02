@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer
       id="about"
-      className="flex flex-col justify-between bg-slate-950 px-6 py-12"
+      className="flex flex-col justify-between px-6 py-12"
     >
       {/* Main Grid */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10">
@@ -50,12 +50,14 @@ export default function Footer() {
       </div>
 
       {/* Big Background Text */}
-    <div className="max-w-7xl mx-auto px-4 pt-0 -mt-8">
-  <h1 className="text-[4rem] sm:text-[6rem] md:text-[10rem] font-extrabold text-white/20
-   tracking-tight text-center leading-none">
-    Foundora
-  </h1>
-</div>
+      <div className="max-w-7xl mx-auto px-4 pt-0 ">
+        <h1
+          className="text-[4rem] sm:text-[6rem] md:text-[10rem] font-extrabold text-white/20
+          tracking-tight text-center leading-none"
+        >
+          Foundora
+        </h1>
+      </div>
     </footer>
   );
 }
