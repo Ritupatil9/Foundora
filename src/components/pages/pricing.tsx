@@ -115,15 +115,7 @@ export default function Price() {
         </motion.div>
       </div>
 
-      {/* ✅ Button placed outside the grid */}
-      <div className="w-full flex justify-center items-center mt-12">
-        <Button
-          onClick={() => navigate("/PriceAgent")}
-          className="bg-indigo-950 text-white rounded-lg hover:bg-indigo-900"
-        >
-          Click to open agents on a new page
-        </Button>
-      </div>
+     
     </section>
   );
 }

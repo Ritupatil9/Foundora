@@ -112,15 +112,7 @@ export default function TeamSection() {
           })}
         </div>
 
-        {/* Navigation Button */}
-        <div className="flex justify-center mt-12">
-          <Button
-            onClick={() => navigate("/AgentsPage")}
-            className="bg-indigo-900 text-white"
-          >
-            Click to open agents on a new page
-          </Button>
-        </div>
+
       </div>
     </motion.section>
   );
